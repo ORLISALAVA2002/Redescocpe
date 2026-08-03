@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REDESCOCPE | Paso 1: Datos del Productor y Finca</title>
+  <!-- ICONO PESTAÑA (FAVICON) -->
+  <link rel="icon" href="1-Photoroom.png" type="image/png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 py-8 px-4">
+
+  <div class="max-w-3xl mx-auto bg-white p-6 md:p-10 rounded-2xl shadow-xl border border-gray-100">
+    
+    <!-- CABECERA ENCABEZADO REDESCOCPE -->
+    <div class="flex flex-col items-center mb-8 pb-6 border-b border-gray-100 text-center">
+      <!-- IMAGEN MÁS GRANDE AQUÍ (h-32 md:h-40) -->
+      <img src="1-Photoroom.png" alt="REDESCOCPE Quinindé" class="h-32 md:h-40 object-contain mb-4">
+      <span class="text-xs font-bold text-green-700 uppercase tracking-wider bg-green-100 px-3 py-1 rounded-full mb-2">REDESCOCPE - Paso 1 de 2</span>
+      <h1 class="text-2xl md:text-3xl font-bold text-gray-950">Registro del Productor y Finca</h1>
+    </div>
+
+    <form onsubmit="guardarYContinuar(event)" class="space-y-8">
+      
+      <!-- SECCIÓN 1: DATOS DEL PRODUCTOR -->
+      <section class="bg-gray-50/60 p-5 rounded-xl border border-gray-100 space-y-4">
+        <h2 class="text-lg font-semibold text-gray-900 border-b pb-2">1. Datos Personales del Productor</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="md:col-span-2">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo <span class="text-red-500">*</span></label>
+            <input type="text" id="nombre" required placeholder="Ej: Juan Antonio Pérez" class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Cédula / DNI <span class="text-red-500">*</span></label>
+            <input type="text" id="cedula" required placeholder="Ej: 0801234567" class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Teléfono / WhatsApp <span class="text-red-500">*</span></label>
+            <input type="tel" id="telefono" required placeholder="Ej: 0991234567" class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Fecha de Nacimiento <span class="text-red-500">*</span></label>
+            <input type="date" id="fechaNacimiento" required class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Sexo <span class="text-red-500">*</span></label>
+            <select id="sexo" required class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
+              <option value="">Seleccione...</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Femenino">Femenino</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Autoidentificación Étnica <span class="text-red-500">*</span></label>
+            <select id="etnia" required class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
+              <option value="">Seleccione...</option>
+              <option value="Mestizo">Mestizo/a</option>
+              <option value="Montubio">Montubio/a</option>
+              <option value="Afroecuatoriano">Afroecuatoriano/a</option>
+              <option value="Indígena">Indígena</option>
+              <option value="Blanco">Blanco/a</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 2: DATOS DE LA FINCA -->
+      <section class="bg-gray-50/60 p-5 rounded-xl border border-gray-100 space-y-4">
+        <h2 class="text-lg font-semibold text-gray-900 border-b pb-2">2. Ubicación e Información de la Finca</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Nombre de la Finca <span class="text-red-500">*</span></label>
+            <input type="text" id="nombreFinca" required placeholder="Ej: Finca San José" class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Superficie Total (Hectáreas) <span class="text-red-500">*</span></label>
+            <input type="number" step="0.1" min="0.1" id="hectareas" required placeholder="Ej: 5.5" class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
+          </div>
+
+          <!-- PROVINCIA -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Provincia <span class="text-red-500">*</span></label>
+            <select id="provincia" required onchange="cargarCantones()" class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
+              <option value="">Seleccione Provincia...</option>
+              <option value="Esmeraldas">Esmeraldas</option>
+              <option value="Pichincha">Pichincha</option>
+              <option value="Imbabura">Imbabura</option>
+            </select>
+          </div>
+
+          <!-- CANTÓN -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Cantón <span class="text-red-500">*</span></label>
+            <select id="canton" required onchange="cargarParroquias()" class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
+              <option value="">Seleccione Cantón...</option>
+            </select>
+          </div>
+
+          <!-- PARROQUIA -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Parroquia <span class="text-red-500">*</span></label>
+            <select id="parroquia" required class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
+              <option value="">Seleccione Parroquia...</option>
+            </select>
+          </div>
+
+          <!-- SECTOR / RECINTO -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Sector / Recinto / Comunidad <span class="text-red-500">*</span></label>
+            <input type="text" id="sector" required placeholder="Ej: Recinto San Pedro, Km 12" class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
+          </div>
+
+          <!-- TIPO DE CACAO -->
+          <div class="md:col-span-2">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Tipo de Cacao <span class="text-red-500">*</span></label>
+            <select id="tipoCacao" required onchange="verificarOtroCacao()" class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
+              <option value="">Seleccione tipo de cacao...</option>
+              <option value="Nacional">Nacional</option>
+              <option value="CCN-51">CCN-51</option>
+              <option value="Pincay">Pincay</option>
+              <option value="Otros">Otros</option>
+            </select>
+          </div>
+
+          <div id="divOtroCacao" class="hidden md:col-span-2">
+            <label class="block text-sm font-medium text-green-800 mb-1">Especifique el otro tipo de cacao <span class="text-red-500">*</span></label>
+            <input type="text" id="otroCacaoTexto" placeholder="Ej: Híbrido Local" class="w-full px-4 py-2.5 bg-green-50 border border-green-300 rounded-lg text-sm">
+          </div>
+        </div>
+      </section>
+
+      <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3.5 rounded-xl shadow-md transition text-base">
+        Guardar y Pasar a Agendar Cita ➡️
+      </button>
+
+    </form>
+  </div>
+
+  <script>
+    const geoDatos = {
+      "Esmeraldas": {
+        "Quinindé": ["Rosa Zárate (Cabecera)", "Cube", "Chura", "Malimpia", "La Unión", "Viche"],
+        "Esmeraldas": ["Esmeraldas", "Vuelta Larga", "Tabiazo", "Tachina", "San Mateo", "Camarones", "Chinca", "Majua", "Carlos Concha"],
+        "Atacames": ["Atacames", "Tonsupa", "Súa", "Tonchigüe", "La Unión"],
+        "Muisne": ["Muisne", "Bolívar", "Daule", "Galera", "Quingue", "San Francisco", "San Gregorio", "San José de Chamanga"],
+        "San Lorenzo": ["San Lorenzo", "Alto Tambo", "Ancón de Sardinas", "Calderón", "Carondelet", "Concepción", "Mata de Plátano", "San Javier", "Santa Rita", "Tambillo"],
+        "Eloy Alfaro": ["Valdez (Limones)", "Anchayacu", "Atahualpa", "Borbón", "La Tola", "Maldonado", "Pampanal de Bolívar", "Selva Alegre", "Telembí"],
+        "Rioverde": ["Rioverde", "Rocafuerte", "Chumundé", "Lagarto", "Montalvo"]
+      },
+      "Pichincha": {
+        "Puerto Quito": ["Puerto Quito"]
+      },
+      "Imbabura": {
+        "Cotacachi": ["García Moreno", "Sagrario", "San Francisco", "Apuela", "Plaza Gutiérrez", "Quiroga", "Cuellaje", "Vacas Galindo"]
+      }
+    };
+
+    function cargarCantones() {
+      const provinciaSelect = document.getElementById('provincia').value;
+      const cantonSelect = document.getElementById('canton');
+      const parroquiaSelect = document.getElementById('parroquia');
+
+      cantonSelect.innerHTML = '<option value="">Seleccione Cantón...</option>';
+      parroquiaSelect.innerHTML = '<option value="">Seleccione Parroquia...</option>';
+
+      if (provinciaSelect && geoDatos[provinciaSelect]) {
+        Object.keys(geoDatos[provinciaSelect]).forEach(canton => {
+          cantonSelect.innerHTML += `<option value="${canton}">${canton}</option>`;
+        });
+      }
+    }
+
+    function cargarParroquias() {
+      const provinciaSelect = document.getElementById('provincia').value;
+      const cantonSelect = document.getElementById('canton').value;
+      const parroquiaSelect = document.getElementById('parroquia');
+
+      parroquiaSelect.innerHTML = '<option value="">Seleccione Parroquia...</option>';
+
+      if (provinciaSelect && cantonSelect && geoDatos[provinciaSelect][cantonSelect]) {
+        geoDatos[provinciaSelect][cantonSelect].forEach(parroquia => {
+          parroquiaSelect.innerHTML += `<option value="${parroquia}">${parroquia}</option>`;
+        });
+      }
+    }
+
+    function verificarOtroCacao() {
+      const select = document.getElementById('tipoCacao');
+      const divOtro = document.getElementById('divOtroCacao');
+      const inputOtro = document.getElementById('otroCacaoTexto');
+      if (select.value === 'Otros') {
+        divOtro.classList.remove('hidden');
+        inputOtro.required = true;
+      } else {
+        divOtro.classList.add('hidden');
+        inputOtro.required = false;
+      }
+    }
+
+    function guardarYContinuar(event) {
+      event.preventDefault();
+
+      let cacaoFinal = document.getElementById('tipoCacao').value;
+      if (cacaoFinal === 'Otros') {
+        cacaoFinal = document.getElementById('otroCacaoTexto').value;
+      }
+
+      const datosProductor = {
+        nombre: document.getElementById('nombre').value,
+        cedula: document.getElementById('cedula').value,
+        telefono: document.getElementById('telefono').value,
+        fechaNacimiento: document.getElementById('fechaNacimiento').value,
+        sexo: document.getElementById('sexo').value,
+        etnia: document.getElementById('etnia').value,
+        finca: document.getElementById('nombreFinca').value,
+        hectareas: document.getElementById('hectareas').value,
+        provincia: document.getElementById('provincia').value,
+        canton: document.getElementById('canton').value,
+        parroquia: document.getElementById('parroquia').value,
+        sector: document.getElementById('sector').value,
+        tipoCacao: cacaoFinal
+      };
+
+      localStorage.setItem('productorTemporal', JSON.stringify(datosProductor));
+      window.location.href = "cita.html";
+    }
+  </script>
+</body>
+</html>
