@@ -3,241 +3,547 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>REDESCOCPE | Paso 1: Datos del Productor y Finca</title>
-  <!-- ICONO PESTAÑA (FAVICON) -->
-  <link rel="icon" href="1-Photoroom.png" type="image/png">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>REDESCOCPE - Levantamiento Cacao 2026</title>
+  
+  <!-- ICONO DE LA PESTAÑA DEL NAVEGADOR (FAVICON) -->
+  <link rel="icon" type="image/png" href="Redescocpe.png">
+
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-    body { font-family: 'Inter', sans-serif; }
+    :root {
+      --primary-green: #1b5e20;
+      --accent-green: #2e7d32;
+      --light-green-bg: #e8f5e9;
+      --badge-bg: #d4edda;
+      --badge-text: #155724;
+      --bg-color: #f4f6f8;
+      --card-bg: #ffffff;
+      --card-inner-bg: #f8f9fa;
+      --border-color: #e0e0e0;
+      --text-color: #212529;
+      --required-red: #d32f2f;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 20px 10px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .main-card {
+      background: var(--card-bg);
+      max-width: 850px;
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      padding: 35px 30px;
+    }
+
+    /* Header & Logo */
+    .header-container {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .logo-wrapper {
+      margin-bottom: 15px;
+    }
+
+    .logo-img {
+      max-width: 500px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .badge {
+      display: inline-block;
+      background-color: var(--badge-bg);
+      color: var(--badge-text);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .header-container h1 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #111111;
+      margin: 0 0 8px 0;
+    }
+
+    .header-container p {
+      color: #666;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    /* Section Cards (Fieldsets) */
+    fieldset {
+      background-color: var(--card-inner-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+
+    legend {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary-green);
+      padding: 0 10px;
+      background: transparent;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    @media (max-width: 640px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      .main-card {
+        padding: 20px 15px;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 15px;
+    }
+
+    label {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #333333;
+    }
+
+    .req {
+      color: var(--required-red);
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+      font-size: 14px;
+      background-color: #ffffff;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--accent-green);
+      box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
+    }
+
+    input[readonly] {
+      background-color: #e9ecef;
+      color: #495057;
+      cursor: not-allowed;
+    }
+
+    /* Table Styling */
+    .table-container {
+      overflow-x: auto;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: white;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
+    }
+
+    th, td {
+      border: 1px solid #e0e0e0;
+      padding: 8px 10px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    th {
+      background-color: var(--light-green-bg);
+      color: var(--primary-green);
+      font-weight: 700;
+    }
+
+    /* Submit Button */
+    button[type="submit"] {
+      background-color: var(--accent-green);
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 100%;
+      box-shadow: 0 4px 12px rgba(46, 125, 50, 0.25);
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    button[type="submit"]:hover {
+      background-color: var(--primary-green);
+    }
+
+    button[type="submit"]:active {
+      transform: scale(0.99);
+    }
+
+    #status {
+      margin-top: 15px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 14px;
+    }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-900 py-8 px-4">
+<body>
 
-  <div class="max-w-3xl mx-auto bg-white p-6 md:p-10 rounded-2xl shadow-xl border border-gray-100">
-    
-    <!-- CABECERA ENCABEZADO REDESCOCPE -->
-    <div class="flex flex-col items-center mb-8 pb-6 border-b border-gray-100 text-center">
-      <!-- IMAGEN MÁS GRANDE AQUÍ (h-32 md:h-40) -->
-      <img src="1-Photoroom.png" alt="REDESCOCPE Quinindé" class="h-32 md:h-40 object-contain mb-4">
-      <span class="text-xs font-bold text-green-700 uppercase tracking-wider bg-green-100 px-3 py-1 rounded-full mb-2">REDESCOCPE - Paso 1 de 2</span>
-      <h1 class="text-2xl md:text-3xl font-bold text-gray-950">Registro del Productor y Finca</h1>
+<div class="main-card">
+  
+  <!-- Header -->
+  <div class="header-container">
+    <div class="logo-wrapper">
+      <img src="Redescocpe.png" alt="Redescocpe Logo" class="logo-img">
     </div>
 
-    <form onsubmit="guardarYContinuar(event)" class="space-y-8">
-      
-      <!-- SECCIÓN 1: DATOS DEL PRODUCTOR -->
-      <section class="bg-gray-50/60 p-5 rounded-xl border border-gray-100 space-y-4">
-        <h2 class="text-lg font-semibold text-gray-900 border-b pb-2">1. Datos Personales del Productor</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="md:col-span-2">
-            <label class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo <span class="text-red-500">*</span></label>
-            <input type="text" id="nombre" required placeholder="Ej: Juan Antonio Pérez" class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Cédula / DNI <span class="text-red-500">*</span></label>
-            <input type="text" id="cedula" required placeholder="Ej: 0801234567" class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Teléfono / WhatsApp <span class="text-red-500">*</span></label>
-            <input type="tel" id="telefono" required placeholder="Ej: 0991234567" class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Fecha de Nacimiento <span class="text-red-500">*</span></label>
-            <input type="date" id="fechaNacimiento" required class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Sexo <span class="text-red-500">*</span></label>
-            <select id="sexo" required class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
-              <option value="">Seleccione...</option>
-              <option value="Masculino">Masculino</option>
-              <option value="Femenino">Femenino</option>
-              <option value="Otro">Otro</option>
-            </select>
-          </div>
-
-          <div class="md:col-span-2">
-            <label class="block text-sm font-medium text-gray-700 mb-1">Autoidentificación Étnica <span class="text-red-500">*</span></label>
-            <select id="etnia" required class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
-              <option value="">Seleccione...</option>
-              <option value="Mestizo">Mestizo/a</option>
-              <option value="Montubio">Montubio/a</option>
-              <option value="Afroecuatoriano">Afroecuatoriano/a</option>
-              <option value="Indígena">Indígena</option>
-              <option value="Blanco">Blanco/a</option>
-              <option value="Otro">Otro</option>
-            </select>
-          </div>
-        </div>
-      </section>
-
-      <!-- SECCIÓN 2: DATOS DE LA FINCA -->
-      <section class="bg-gray-50/60 p-5 rounded-xl border border-gray-100 space-y-4">
-        <h2 class="text-lg font-semibold text-gray-900 border-b pb-2">2. Ubicación e Información de la Finca</h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Nombre de la Finca <span class="text-red-500">*</span></label>
-            <input type="text" id="nombreFinca" required placeholder="Ej: Finca San José" class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Superficie Total (Hectáreas) <span class="text-red-500">*</span></label>
-            <input type="number" step="0.1" min="0.1" id="hectareas" required placeholder="Ej: 5.5" class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
-          </div>
-
-          <!-- PROVINCIA -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Provincia <span class="text-red-500">*</span></label>
-            <select id="provincia" required onchange="cargarCantones()" class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
-              <option value="">Seleccione Provincia...</option>
-              <option value="Esmeraldas">Esmeraldas</option>
-              <option value="Pichincha">Pichincha</option>
-              <option value="Imbabura">Imbabura</option>
-            </select>
-          </div>
-
-          <!-- CANTÓN -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Cantón <span class="text-red-500">*</span></label>
-            <select id="canton" required onchange="cargarParroquias()" class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
-              <option value="">Seleccione Cantón...</option>
-            </select>
-          </div>
-
-          <!-- PARROQUIA -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Parroquia <span class="text-red-500">*</span></label>
-            <select id="parroquia" required class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
-              <option value="">Seleccione Parroquia...</option>
-            </select>
-          </div>
-
-          <!-- SECTOR / RECINTO -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Sector / Recinto / Comunidad <span class="text-red-500">*</span></label>
-            <input type="text" id="sector" required placeholder="Ej: Recinto San Pedro, Km 12" class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
-          </div>
-
-          <!-- TIPO DE CACAO -->
-          <div class="md:col-span-2">
-            <label class="block text-sm font-medium text-gray-700 mb-1">Tipo de Cacao <span class="text-red-500">*</span></label>
-            <select id="tipoCacao" required onchange="verificarOtroCacao()" class="w-full px-4 py-2.5 bg-white border rounded-lg focus:ring-2 focus:ring-green-500 text-sm">
-              <option value="">Seleccione tipo de cacao...</option>
-              <option value="Nacional">Nacional</option>
-              <option value="CCN-51">CCN-51</option>
-              <option value="Pincay">Pincay</option>
-              <option value="Otros">Otros</option>
-            </select>
-          </div>
-
-          <div id="divOtroCacao" class="hidden md:col-span-2">
-            <label class="block text-sm font-medium text-green-800 mb-1">Especifique el otro tipo de cacao <span class="text-red-500">*</span></label>
-            <input type="text" id="otroCacaoTexto" placeholder="Ej: Híbrido Local" class="w-full px-4 py-2.5 bg-green-50 border border-green-300 rounded-lg text-sm">
-          </div>
-        </div>
-      </section>
-
-      <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3.5 rounded-xl shadow-md transition text-base">
-        Guardar y Pasar a Agendar Cita ➡️
-      </button>
-
-    </form>
+    <div class="badge">REDESCOCPE - PASO 1 DE 1</div>
+    <h1>Registro del Productor y Finca</h1>
+    <p>Proyección de Cosecha y Compra de Cacao 2026</p>
   </div>
 
-  <script>
-    const geoDatos = {
-      "Esmeraldas": {
-        "Quinindé": ["Rosa Zárate (Cabecera)", "Cube", "Chura", "Malimpia", "La Unión", "Viche"],
-        "Esmeraldas": ["Esmeraldas", "Vuelta Larga", "Tabiazo", "Tachina", "San Mateo", "Camarones", "Chinca", "Majua", "Carlos Concha"],
-        "Atacames": ["Atacames", "Tonsupa", "Súa", "Tonchigüe", "La Unión"],
-        "Muisne": ["Muisne", "Bolívar", "Daule", "Galera", "Quingue", "San Francisco", "San Gregorio", "San José de Chamanga"],
-        "San Lorenzo": ["San Lorenzo", "Alto Tambo", "Ancón de Sardinas", "Calderón", "Carondelet", "Concepción", "Mata de Plátano", "San Javier", "Santa Rita", "Tambillo"],
-        "Eloy Alfaro": ["Valdez (Limones)", "Anchayacu", "Atahualpa", "Borbón", "La Tola", "Maldonado", "Pampanal de Bolívar", "Selva Alegre", "Telembí"],
-        "Rioverde": ["Rioverde", "Rocafuerte", "Chumundé", "Lagarto", "Montalvo"]
-      },
-      "Pichincha": {
-        "Puerto Quito": ["Puerto Quito"]
-      },
-      "Imbabura": {
-        "Cotacachi": ["García Moreno", "Sagrario", "San Francisco", "Apuela", "Plaza Gutiérrez", "Quiroga", "Cuellaje", "Vacas Galindo"]
-      }
+  <form id="cacaoForm">
+    
+    <!-- 1. Identificación del Formulario -->
+    <fieldset>
+      <legend>1. Identificación del Formulario</legend>
+      <div class="form-row">
+        <div class="form-group">
+          <label>No. Secuencial <span class="req">*</span></label>
+          <input type="text" id="secuencial" readonly placeholder="Cargando secuencial...">
+        </div>
+        <div class="form-group">
+          <label>Fecha Aplicación <span class="req">*</span></label>
+          <input type="date" id="fecha" readonly>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Sitio de Aplicación <span class="req">*</span></label>
+          <select id="sitio" required>
+            <option value="">Seleccione...</option>
+            <option value="En el CAQ">En el CAQ</option>
+            <option value="En la finca">En la finca</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Nombre del Aplicador <span class="req">*</span></label>
+          <select id="aplicador_nombre" required>
+            <option value="">Seleccione...</option>
+            <option value="Orlis Alava">Orlis Alava</option>
+            <option value="Jonathan Paucar">Jonathan Paucar</option>
+            <option value="Angel Sarango">Angel Sarango</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Cargo del Aplicador <span class="req">*</span></label>
+        <input type="text" id="aplicador_cargo" placeholder="Ej: Técnico de Campo" required>
+      </div>
+    </fieldset>
+
+    <!-- 2. Datos Personales del Proveedor -->
+    <fieldset>
+      <legend>2. Datos Personales del Productor</legend>
+      <div class="form-row">
+        <div class="form-group">
+          <label>No. Proveedor <span class="req">*</span></label>
+          <input type="text" id="proveedor_no" placeholder="Cargando..." required>
+        </div>
+        <div class="form-group">
+          <label>Nombre Completo <span class="req">*</span></label>
+          <input type="text" id="proveedor_nombre" placeholder="Ej: Juan Antonio Pérez" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Código Interno</label>
+          <input type="text" id="proveedor_codigo" placeholder="Ej: COD-1020">
+        </div>
+        <div class="form-group">
+          <label>Cédula / DNI <span class="req">*</span></label>
+          <input type="text" id="proveedor_cedula" placeholder="Ej: 0801234567" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Teléfono / WhatsApp <span class="req">*</span></label>
+          <input type="tel" id="proveedor_telefono" placeholder="Ej: 0991234567">
+        </div>
+        <div class="form-group">
+          <label>Ubicación Finca <span class="req">*</span></label>
+          <input type="text" id="proveedor_ubicacion" placeholder="Ej: Recinto Viche" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Referencia de Ubicación</label>
+          <input type="text" id="finca_referencia" placeholder="Ej: Junto a la escuela">
+        </div>
+        <div class="form-group">
+          <label>Distancia al CAQ (Km)</label>
+          <input type="number" step="0.1" id="distancia_caq" placeholder="Ej: 12.5">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Tiempo Movilización (HH:MM)</label>
+        <input type="text" id="tiempo_caq" placeholder="Ej: 01:30">
+      </div>
+    </fieldset>
+
+    <!-- 3. Información para las Proyecciones -->
+    <fieldset>
+      <legend>3. Superficie y Plantaciones (Hectáreas)</legend>
+      <div class="form-row">
+        <div class="form-group">
+          <label>CCN51 - Has. Sembradas</label>
+          <input type="number" step="0.1" id="has_ccn51_sembradas" value="0">
+        </div>
+        <div class="form-group">
+          <label>CCN51 - Has. en Producción</label>
+          <input type="number" step="0.1" id="has_ccn51_produccion" value="0">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Fino de Aroma - Has. Sembradas</label>
+          <input type="number" step="0.1" id="has_fino_sembradas" value="0">
+        </div>
+        <div class="form-group">
+          <label>Fino de Aroma - Has. en Producción</label>
+          <input type="number" step="0.1" id="has_fino_produccion" value="0">
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- 4. Calendario Mensual -->
+    <fieldset>
+      <legend>4. Calendario Mensual de Cosecha (Enero a Diciembre)</legend>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th rowspan="2">Mes</th>
+              <th colspan="2">Para CCN51</th>
+              <th colspan="2">Para Fino de Aroma</th>
+            </tr>
+            <tr>
+              <th>Nivel (A/M/B)</th>
+              <th>Prom. (lbs)</th>
+              <th>Nivel (A/M/B)</th>
+              <th>Prom. (lbs)</th>
+            </tr>
+          </thead>
+          <tbody id="tablaMeses"></tbody>
+        </table>
+      </div>
+    </fieldset>
+
+    <!-- 5. Rendimiento y Densidad -->
+    <fieldset>
+      <legend>5. Rendimiento y Densidad de Plantación</legend>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Rendimiento CCN51 (lbs/Ha/año)</label>
+          <input type="number" id="rendimiento_ccn51" value="0">
+        </div>
+        <div class="form-group">
+          <label>Rendimiento Fino Aroma (lbs/Ha/año)</label>
+          <input type="number" id="rendimiento_fino" value="0">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Densidad CCN51 (Plantas/Ha sembradas)</label>
+          <input type="number" id="densidad_ccn51_sembradas" value="0">
+        </div>
+        <div class="form-group">
+          <label>Densidad CCN51 (Plantas/Ha producción)</label>
+          <input type="number" id="densidad_ccn51_produccion" value="0">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Densidad Fino Aroma (Plantas/Ha sembradas)</label>
+          <input type="number" id="densidad_fino_sembradas" value="0">
+        </div>
+        <div class="form-group">
+          <label>Densidad Fino Aroma (Plantas/Ha producción)</label>
+          <input type="number" id="densidad_fino_produccion" value="0">
+        </div>
+      </div>
+    </fieldset>
+
+    <button type="submit" id="btnGuardar">Guardar Registro</button>
+  </form>
+
+  <div id="status"></div>
+</div>
+
+<script>
+  // Link Web App configurado
+  const scriptURL = "https://script.google.com/macros/s/AKfycbwsv6Og9P4M6Q13sboLGDjrE5teojylnurv1BUttFFkyvjVhCjiQDG2PDi8-fi5ZA75/exec";
+  const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+  // Cargar fecha actual
+  document.getElementById('fecha').value = new Date().toISOString().split('T')[0];
+
+  // Formato automático de 6 dígitos si el usuario edita manualmente el número de proveedor
+  const provInput = document.getElementById('proveedor_no');
+  provInput.addEventListener('blur', function() {
+    if(this.value) {
+      this.value = String(this.value).padStart(6, '0');
+    }
+  });
+
+  // Obtener número secuencial automático y asignarlo tanto al Secuencial como al Proveedor
+  function cargarSecuencial() {
+    fetch(scriptURL)
+      .then(res => res.json())
+      .then(data => {
+        if(data && data.secuencial) {
+          document.getElementById('secuencial').value = data.secuencial;
+          document.getElementById('proveedor_no').value = data.secuencial;
+        }
+      })
+      .catch(() => {
+        document.getElementById('secuencial').value = "000001";
+        document.getElementById('proveedor_no').value = "000001";
+      });
+  }
+  cargarSecuencial();
+
+  // Crear la tabla mensual dinámicamente
+  const tbody = document.getElementById('tablaMeses');
+  meses.forEach(m => {
+    const key = m.toLowerCase();
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><strong>${m}</strong></td>
+      <td>
+        <select id="m_${key}_ccn51_nivel">
+          <option value="">-</option>
+          <option value="A">Alta (A)</option>
+          <option value="M">Media (M)</option>
+          <option value="B">Baja (B)</option>
+        </select>
+      </td>
+      <td><input type="number" id="m_${key}_ccn51_lbs" value="0" style="width:75px; text-align:center;"></td>
+      <td>
+        <select id="m_${key}_fino_nivel">
+          <option value="">-</option>
+          <option value="A">Alta (A)</option>
+          <option value="M">Media (M)</option>
+          <option value="B">Baja (B)</option>
+        </select>
+      </td>
+      <td><input type="number" id="m_${key}_fino_lbs" value="0" style="width:75px; text-align:center;"></td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  // Envío de formulario a Google Apps Script
+  document.getElementById('cacaoForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const statusDiv = document.getElementById('status');
+    const btn = document.getElementById('btnGuardar');
+    
+    statusDiv.style.color = '#333';
+    statusDiv.innerHTML = "Guardando información en Google Drive...";
+    btn.disabled = true;
+
+    const payload = {
+      secuencial: document.getElementById('secuencial').value,
+      fecha: document.getElementById('fecha').value,
+      sitio: document.getElementById('sitio').value,
+      aplicador_nombre: document.getElementById('aplicador_nombre').value,
+      aplicador_cargo: document.getElementById('aplicador_cargo').value,
+      proveedor_no: document.getElementById('proveedor_no').value,
+      proveedor_nombre: document.getElementById('proveedor_nombre').value,
+      proveedor_codigo: document.getElementById('proveedor_codigo').value,
+      proveedor_cedula: document.getElementById('proveedor_cedula').value,
+      proveedor_telefono: document.getElementById('proveedor_telefono').value,
+      finca_ubicacion: document.getElementById('proveedor_ubicacion').value,
+      finca_referencia: document.getElementById('finca_referencia').value,
+      distancia_caq: document.getElementById('distancia_caq').value,
+      tiempo_caq: document.getElementById('tiempo_caq').value,
+      has_ccn51_sembradas: document.getElementById('has_ccn51_sembradas').value,
+      has_ccn51_produccion: document.getElementById('has_ccn51_produccion').value,
+      has_fino_sembradas: document.getElementById('has_fino_sembradas').value,
+      has_fino_produccion: document.getElementById('has_fino_produccion').value,
+      rendimiento_ccn51: document.getElementById('rendimiento_ccn51').value,
+      rendimiento_fino: document.getElementById('rendimiento_fino').value,
+      densidad_ccn51_sembradas: document.getElementById('densidad_ccn51_sembradas').value,
+      densidad_ccn51_produccion: document.getElementById('densidad_ccn51_produccion').value,
+      densidad_fino_sembradas: document.getElementById('densidad_fino_sembradas').value,
+      densidad_fino_produccion: document.getElementById('densidad_fino_produccion').value
     };
 
-    function cargarCantones() {
-      const provinciaSelect = document.getElementById('provincia').value;
-      const cantonSelect = document.getElementById('canton');
-      const parroquiaSelect = document.getElementById('parroquia');
+    meses.forEach(m => {
+      const key = m.toLowerCase();
+      payload[`m_${key}_ccn51_nivel`] = document.getElementById(`m_${key}_ccn51_nivel`).value;
+      payload[`m_${key}_ccn51_lbs`] = document.getElementById(`m_${key}_ccn51_lbs`).value;
+      payload[`m_${key}_fino_nivel`] = document.getElementById(`m_${key}_fino_nivel`).value;
+      payload[`m_${key}_fino_lbs`] = document.getElementById(`m_${key}_fino_lbs`).value;
+    });
 
-      cantonSelect.innerHTML = '<option value="">Seleccione Cantón...</option>';
-      parroquiaSelect.innerHTML = '<option value="">Seleccione Parroquia...</option>';
-
-      if (provinciaSelect && geoDatos[provinciaSelect]) {
-        Object.keys(geoDatos[provinciaSelect]).forEach(canton => {
-          cantonSelect.innerHTML += `<option value="${canton}">${canton}</option>`;
-        });
-      }
-    }
-
-    function cargarParroquias() {
-      const provinciaSelect = document.getElementById('provincia').value;
-      const cantonSelect = document.getElementById('canton').value;
-      const parroquiaSelect = document.getElementById('parroquia');
-
-      parroquiaSelect.innerHTML = '<option value="">Seleccione Parroquia...</option>';
-
-      if (provinciaSelect && cantonSelect && geoDatos[provinciaSelect][cantonSelect]) {
-        geoDatos[provinciaSelect][cantonSelect].forEach(parroquia => {
-          parroquiaSelect.innerHTML += `<option value="${parroquia}">${parroquia}</option>`;
-        });
-      }
-    }
-
-    function verificarOtroCacao() {
-      const select = document.getElementById('tipoCacao');
-      const divOtro = document.getElementById('divOtroCacao');
-      const inputOtro = document.getElementById('otroCacaoTexto');
-      if (select.value === 'Otros') {
-        divOtro.classList.remove('hidden');
-        inputOtro.required = true;
-      } else {
-        divOtro.classList.add('hidden');
-        inputOtro.required = false;
-      }
-    }
-
-    function guardarYContinuar(event) {
-      event.preventDefault();
-
-      let cacaoFinal = document.getElementById('tipoCacao').value;
-      if (cacaoFinal === 'Otros') {
-        cacaoFinal = document.getElementById('otroCacaoTexto').value;
-      }
-
-      const datosProductor = {
-        nombre: document.getElementById('nombre').value,
-        cedula: document.getElementById('cedula').value,
-        telefono: document.getElementById('telefono').value,
-        fechaNacimiento: document.getElementById('fechaNacimiento').value,
-        sexo: document.getElementById('sexo').value,
-        etnia: document.getElementById('etnia').value,
-        finca: document.getElementById('nombreFinca').value,
-        hectareas: document.getElementById('hectareas').value,
-        provincia: document.getElementById('provincia').value,
-        canton: document.getElementById('canton').value,
-        parroquia: document.getElementById('parroquia').value,
-        sector: document.getElementById('sector').value,
-        tipoCacao: cacaoFinal
-      };
-
-      localStorage.setItem('productorTemporal', JSON.stringify(datosProductor));
-      window.location.href = "cita.html";
-    }
-  </script>
+    fetch(scriptURL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(() => {
+      statusDiv.style.color = '#1b5e20';
+      statusDiv.innerHTML = "¡Registro guardado con éxito en Google Drive!";
+      document.getElementById('cacaoForm').reset();
+      
+      // Restablecer valores iniciales
+      document.getElementById('fecha').value = new Date().toISOString().split('T')[0];
+      
+      // Consultar el nuevo correlativo automáticamente para ambos números
+      cargarSecuencial();
+      btn.disabled = false;
+    })
+    .catch(error => {
+      statusDiv.style.color = '#d32f2f';
+      statusDiv.innerHTML = "Error al guardar: " + error.message;
+      btn.disabled = false;
+    });
+  });
+</script>
 </body>
 </html>
